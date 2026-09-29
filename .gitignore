@@ -1,0 +1,27 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+**/output/
+**/job.json
+**/costs.json
+**/source/frame.*
+**/avatar/reference.*
+
+.ugc-forge/
+
+# Local credentials and production projects
+/config.yaml
+/runs/
+
+# OS, editor and build leftovers
+.DS_Store
+.obsidian/
+*.egg-info/
+.pytest_cache/
+
+# Per-project settings can hold API keys
+**/config.yaml
+!config.example.yaml
+build/
+dist/

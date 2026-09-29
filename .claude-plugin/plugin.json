@@ -1,0 +1,12 @@
+{
+  "name": "ugc-forge",
+  "version": "0.9.0",
+  "description": "Plan and produce raw AI-presented A-roll and B-roll source clips from reference-driven fictional avatars.",
+  "license": "Apache-2.0",
+  "skills": [
+    "./.claude/skills"
+  ],
+  "author": {
+    "name": "Indy Gill"
+  }
+}

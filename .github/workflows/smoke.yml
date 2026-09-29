@@ -1,0 +1,23 @@
+name: tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.11", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # A regular (non-editable) install, as a user would have.
+      - run: pip install ".[dev]"
+      - run: python -m pytest -q
+      - run: ugc-forge init test-project
+      - run: ugc-forge preflight test-project
+      - run: ugc-forge status test-project

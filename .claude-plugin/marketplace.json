@@ -1,0 +1,14 @@
+{
+  "name": "ugc-forge",
+  "description": "UGC Forge: an agent skill and command-line tool for AI presenter videos.",
+  "owner": {
+    "name": "Indy Gill"
+  },
+  "plugins": [
+    {
+      "name": "ugc-forge",
+      "source": "./",
+      "description": "Plan and produce raw AI-presented A-roll and B-roll source clips from reference-driven fictional avatars."
+    }
+  ]
+}

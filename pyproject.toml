@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ugc-forge"
+version = "0.9.0"
+description = "Open-source agent skill and deterministic CLI for AI-presented A-roll and B-roll source-clip workflows."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{ name = "Indy Gill" }]
+license-files = ["LICENSE", "NOTICE"]
+dependencies = [
+  "google-genai>=2.19.0",
+  "PyYAML>=6.0",
+  "Pillow>=10.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+ugc-forge = "ugc_forge.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ugc_forge*"]
+
+[tool.setuptools.package-data]
+ugc_forge = ["skill/SKILL.md"]

@@ -1,0 +1,7 @@
+[
+  {"id":"hook","dialogue":"I spent years thinking my skincare routine needed more products.","a_roll":true,"overlay":null},
+  {"id":"shelf","dialogue":"At one point, this was my bathroom shelf.","a_roll":true,"overlay":{"type":"broll","description":"Close-up of the crowded bathroom shelf","asset":"bathroom-shelf.mp4"}},
+  {"id":"strip-back","dialogue":"Then I stripped everything back.","a_roll":true,"overlay":null},
+  {"id":"routine","dialogue":"Cleanser. This. SPF. That's basically it.","a_roll":true,"overlay":{"type":"avatar_broll","description":"Same character applying the moisturiser at the bathroom mirror in different casual clothing","duration":4}},
+  {"id":"six-weeks","dialogue":"I've been doing that for six weeks now.","a_roll":true,"overlay":null}
+]

@@ -1,0 +1,107 @@
+# Which service generates images and video: kie (kie.ai, default) or google (Gemini API).
+# The easiest way to choose and add your key is `ugc-forge setup`, which saves it privately.
+provider: kie
+
+workspace:
+  root: "~/.ugc-forge"
+
+kie:
+  api_key: null # Paste your kie.ai key here in your local config.yaml.
+  api_key_env: UGC_FORGE_KIE_API_KEY
+  # Seconds to wait for each kie.ai job; its queue can be slow. An unfinished job is collected on the next run.
+  timeout: 1800
+
+# Google models, used when provider is google. Model IDs are pinned: image models may be
+# gemini-3-pro-image or gemini-3.1-flash-image; video must be gemini-omni-1.1-flash.
+generation_models:
+  image:
+    model: gemini-3-pro-image
+    api_key: null # Paste your key here in your local config.yaml.
+    api_key_env: UGC_FORGE_IMAGE_API_KEY
+
+  video:
+    model: gemini-omni-1.1-flash
+    api_key: null # Paste your key here in your local config.yaml.
+    api_key_env: UGC_FORGE_VIDEO_API_KEY
+
+  # B-roll image edits. Uses the image key unless given its own. gemini-3.1-flash-image is
+  # half the price and fine for simple edits, but follows instructions less closely.
+  broll_image:
+    model: gemini-3-pro-image
+
+video:
+  resolution: 720p
+  aspect_ratio: "9:16"
+  # Seconds to wait for each clip before giving up; an unfinished clip is collected on the next run.
+  timeout: 600
+
+generation:
+  # After prompt calibration is explicitly locked:
+  # batch = submit all remaining approved avatar beats concurrently
+  # sequential = generate/review/accept one beat before submitting the next
+  mode: batch
+  concurrency: 3
+  require_calibration: true
+  calibration_beat_id: null
+  # Jobs one run may submit for a clip, counting the first (minimum 1). A job that's already paid for
+  # is never resubmitted unless the provider reports that it failed.
+  max_retries: 3
+  retry_delay_seconds: 5
+  resume: true
+
+timing:
+  words_per_minute: 135
+  lead_in_seconds: 0.25
+  tail_seconds: 0.50
+  # Durations sent to the pinned Omni model; any subset of these is accepted.
+  supported_durations: [3, 4, 5, 6, 7, 8, 9, 10]
+  # When dialogue sits awkwardly between durations, preflight warns rather than
+  # silently padding or squeezing it.
+  pacing_warning_ratio: 0.18
+
+cost:
+  currency: USD
+  pricing_date: "2026-09-28"
+  # Video output with audio only; excludes input and text-output charges.
+  # $17.50 / 1M output tokens; 720p uses 5792 tokens/second.
+  # https://ai.google.dev/gemini-api/docs/pricing
+  # Resolution token rates: https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing
+  usd_per_second_720p: 0.10136
+  # Used to price the video tokens the API reports after each run.
+  usd_per_million_video_output_tokens: 17.50
+  # Image output at 1K/2K resolution; about 1120 tokens (= $0.134) per image.
+  image_usd_per_million_output_tokens:
+    gemini-3-pro-image: 120.0
+    gemini-3.1-flash-image: 60.0
+  # kie.ai: credits per clip, $0.005 per credit (kie.ai's listed prices, 2026-09-28). 360p costs the same
+  # as 720p (4s measured live); images measured at 18 credits. Forge records the credits each job used.
+  kie:
+    usd_per_credit: 0.005
+    video_credits:
+      360p: {4: 63, 6: 84, 8: 105, 10: 126}
+      720p: {4: 63, 6: 84, 8: 105, 10: 126}
+      1080p: {4: 63, 6: 84, 8: 105, 10: 126}
+      4k: {4: 147, 6: 168, 8: 189, 10: 210}
+    image_credits: 18
+  estimated_image_output_tokens: 1120
+  resolution_multipliers:
+    720p: 1.0
+    360p: 0.3333908848411602 # 1931 / 5792
+    1080p: 1.5 # 8688 / 5792
+    4k: 3.0 # 17376 / 5792
+
+paths:
+  source_frame: source/frame.jpg
+  avatar_spec: avatar/spec.md
+  avatar_reference: avatar/reference.png
+  scene_prompt: prompts/scene.md
+  fixed_rules_prompt: prompts/fixed-rules.md
+  beats: beats.json
+  output: output
+  a_roll_output: output/a-roll
+  b_roll_output: output/b-roll
+
+broll:
+  default_duration: 4
+  # Used when a generated B-roll beat has no overlay.animation_prompt.
+  default_animation_prompt: "Subtle, natural movement. No dialogue."

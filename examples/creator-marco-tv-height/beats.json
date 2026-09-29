@@ -1,0 +1,50 @@
+[
+  {
+    "id": "hook",
+    "dialogue": "Why does everyone put their TV up here?",
+    "a_roll": true,
+    "overlay": null
+  },
+  {
+    "id": "problem",
+    "dialogue": "You're sitting down here, and your television is halfway to the ceiling.",
+    "a_roll": true,
+    "overlay": {
+      "type": "scene_broll",
+      "description": "A beautifully styled modern living room, the kind an interiors creator would film, photographed on a phone from behind a sofa. Warm neutral palette, a cream boucle sofa facing a fireplace, oak floor, a few tasteful objects, tidy. A large TV is mounted very high on the wall above the fireplace, far above the eye level of anyone sitting on the sofa. Soft evening light, no people.",
+      "inputs": [],
+      "animation_prompt": "Slow tilt up from the sofa to the TV high on the wall.",
+      "duration": 4
+    }
+  },
+  {
+    "id": "look-up",
+    "dialogue": "So every evening you're basically doing this.",
+    "a_roll": true,
+    "overlay": {
+      "type": "avatar_broll",
+      "description": "The man in the first image sits on the sofa in the room from the second image, facing the fireplace and the TV. The camera is behind him and slightly to one side, so we see the back and side of his head. He tilts his head back to look up at the TV mounted high on the wall in front of him.",
+      "inputs": [
+        "avatar",
+        "problem"
+      ],
+      "animation_prompt": "He keeps craning his neck up at the TV in front of him, then rubs the back of his neck.",
+      "duration": 4
+    }
+  },
+  {
+    "id": "position",
+    "dialogue": "Start with where your eyes actually are when you're sitting down.",
+    "a_roll": true,
+    "overlay": {
+      "type": "graphic",
+      "description": "Simple explanatory visual showing seated eye line and television centre"
+    }
+  },
+  {
+    "id": "close",
+    "dialogue": "Design the room for the people living in it, not the estate-agent photos.",
+    "a_roll": true,
+    "overlay": null
+  }
+]
