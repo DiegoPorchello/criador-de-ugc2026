@@ -326,7 +326,7 @@ def cmd_generate(a):
     print(f"Generating {len(pl['pending'])} clip(s), {int(cfg['generation']['concurrency'])} at a time; each usually takes one to two minutes. "
           "If this is interrupted, rerun the same command: clips already paid for are collected, not paid for again.",flush=True)
     def worker(r):
-        extra={"fingerprint":r["fingerprint"],"content_fingerprint":r["content_fingerprint"],"output":str(r["output"].relative_to(p))}
+        extra={"fingerprint":r["fingerprint"],"content_fingerprint":r["content_fingerprint"],"output":r["output"].relative_to(p).as_posix()}
         return r["id"],jobs.run_clip(r["prompt"],ref,cfg,r["duration"],r["output"],s["clips"].get(r["id"],{}),
                                      lambda rec: persist(r["id"],rec),extra,on_retry=lambda msg: print(f"[RETRYING] {r['id']}: {msg}"))
     done=[r for r in pl["rows"] if r["status"]=="done"]

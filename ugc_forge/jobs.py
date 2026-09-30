@@ -10,7 +10,13 @@ def write_json(path: Path, data):
     # A temp name unique to this process and thread, so two writers never clash over the same temp file.
     tmp = path.with_name(f".{path.name}.{os.getpid()}.{threading.get_ident()}.tmp")
     tmp.write_text(json.dumps(data, indent=2, default=str), encoding="utf-8")
-    tmp.replace(path)
+    for attempt in range(40):
+        try:
+            tmp.replace(path); return
+        except PermissionError:
+            # Windows refuses a rename while another write is replacing the same file; it clears in moments.
+            if attempt == 39: raise
+            time.sleep(0.05)
 
 @contextmanager
 def file_lock(path: Path, name: str = "", timeout: float = 120, stale_after: float = 900):
@@ -85,7 +91,7 @@ def place_output(project: Path, record: dict, expected: Path):
     if current.resolve() != expected.resolve():
         expected.parent.mkdir(parents=True, exist_ok=True)
         current.replace(expected)
-        record["output"] = str(expected.relative_to(project))
+        record["output"] = expected.relative_to(project).as_posix()
 
 def _previous_paid(record: dict) -> list[dict]:
     """Earlier jobs for this clip that were, or may have been, paid for; kept so costs.json never forgets them."""

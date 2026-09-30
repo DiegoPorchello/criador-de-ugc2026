@@ -32,7 +32,7 @@ def adopt_calibration(project: Path, row: dict) -> dict:
     take=_calibration_take(project)
     row["output"].parent.mkdir(parents=True,exist_ok=True)
     shutil.copy2(project/take["output"],row["output"])
-    rec={"status":"success","fingerprint":row["fingerprint"],"content_fingerprint":row["content_fingerprint"],"duration":take["duration"],"output":str(row["output"].relative_to(project)),
+    rec={"status":"success","fingerprint":row["fingerprint"],"content_fingerprint":row["content_fingerprint"],"duration":take["duration"],"output":row["output"].relative_to(project).as_posix(),
          "attempts":0,"source":"calibration","calibration_attempt":take["attempt"],"provider":take.get("provider"),"meta":take.get("meta",{})}
     update(project,lambda st: st["clips"].__setitem__(row["id"],rec))
     return rec

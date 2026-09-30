@@ -70,7 +70,7 @@ def _generate(project: Path,cfg: dict,bid: str,beat: dict):
     attempt=resume["attempt"] if resume else len(state["attempts"])+1
     outdir=project/cfg["paths"]["output"]/"calibration"; outdir.mkdir(parents=True,exist_ok=True)
     outfile=outdir/f"{bid}_attempt-{attempt:02d}.mp4"
-    extra={"attempt":attempt,"beat_id":bid,"output":str(outfile.relative_to(project)),"fingerprint":fp,
+    extra={"attempt":attempt,"beat_id":bid,"output":outfile.relative_to(project).as_posix(),"fingerprint":fp,
            "prompt_hash":prompt_hash(scene,fixed),"reference_sha256":ref_sha}
     def persist(rec):
         # Merge only this attempt into the latest file, so a lock-prompt or abandon made meanwhile survives.

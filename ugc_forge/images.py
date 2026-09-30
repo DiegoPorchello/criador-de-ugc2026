@@ -11,7 +11,7 @@ from . import jobs
 def _now() -> str: return datetime.now(timezone.utc).isoformat()
 
 def _rel(project: Path, p: Path) -> str:
-    try: return str(p.resolve().relative_to(project.resolve()))
+    try: return p.resolve().relative_to(project.resolve()).as_posix()  # forward slashes on every OS
     except ValueError: return str(p)
 
 def adopt_existing(project: Path, current: Path, history: Path, prefix: str, entry: dict, note: str="existing image adopted"):

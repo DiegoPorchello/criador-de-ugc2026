@@ -59,7 +59,7 @@ def _generate_current(project: Path, cfg: dict):
             else: att.append(rec)
         jobs.update_json(session_path(project),change,lambda: {"mode":"sequential","clips":{}})
     rec=jobs.run_clip(item["prompt"],ref,cfg,item["duration"],outfile,resume or {},persist,
-                      {"attempt":attempt_no,"output":str(outfile.relative_to(project)),"fingerprint":item["fingerprint"]})
+                      {"attempt":attempt_no,"output":outfile.relative_to(project).as_posix(),"fingerprint":item["fingerprint"]})
     persist(rec)
     if rec["status"]!="success":
         raise RuntimeError(f"{bid} attempt {attempt_no} did not produce a clip: {rec.get('error')}"
@@ -80,7 +80,7 @@ def accept_current(project: Path, cfg: dict, attempt_no: int|None=None):
     item["output"].parent.mkdir(parents=True,exist_ok=True)
     shutil.copy2(project/chosen["output"],item["output"])
     rec={"status":"success","fingerprint":item["fingerprint"],"content_fingerprint":item["content_fingerprint"],"duration":chosen["duration"],
-         "output":str(item["output"].relative_to(project)),"attempts":len(ok),
+         "output":item["output"].relative_to(project).as_posix(),"attempts":len(ok),
          "accepted_attempt":chosen["attempt"],"source":"sequential","meta":chosen.get("meta",{})}
     aroll.update(project,lambda st: st["clips"].__setitem__(item["id"],rec))
     return current(project,cfg)
