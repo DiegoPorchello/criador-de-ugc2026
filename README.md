@@ -104,20 +104,46 @@ This is that episode, made with Forge on kie.ai at 720p on 2026-09-29. Marco is 
 **A-roll, one clip per line:**
 
 1. *"Why does everyone put their TV up here?"*
-   <!-- VIDEO: drag examples/creator-marco-tv-height/output/a-roll/01_hook.mp4 here on github.com -->
+   
+https://github.com/user-attachments/assets/c845a68a-9f04-434b-9c62-aa4b55ba618c
+
 2. *"You're sitting down here, and your television is halfway to the ceiling."*
-   <!-- VIDEO: 02_problem.mp4 -->
+
+
+https://github.com/user-attachments/assets/303459ba-fdf3-4552-b3ea-d1c87d944e75
+
+
 3. *"So every evening you're basically doing this."*
-   <!-- VIDEO: 03_look-up.mp4 -->
+   
+
+https://github.com/user-attachments/assets/fdaab2b4-51ea-4f98-a0aa-4f35396db619
+
+
 4. *"Start with where your eyes actually are when you're sitting down."*
-   <!-- VIDEO: 04_position.mp4 -->
+   
+
+https://github.com/user-attachments/assets/5770930f-c0d1-40c8-986e-b679b197e35b
+
+
 5. *"Design the room for the people living in it, not the estate-agent photos."*
-   <!-- VIDEO: 05_close.mp4 -->
+   
+
+https://github.com/user-attachments/assets/9563a96a-35f2-4892-bdcc-80d7ded43293
+
+
 
 **B-roll, to lay over lines 2 and 3:**
 
-- `problem`: a new living room, made from a description alone; the camera moves in from the sofa to the TV high above the fireplace <!-- VIDEO: output/b-roll/02_problem.mp4 -->
-- `look-up`: Marco on that sofa, seen from behind, looking up at the TV and rubbing his neck <!-- VIDEO: output/b-roll/03_look-up.mp4 -->
+- `problem`: a new living room, made from a description alone; the camera moves in from the sofa to the TV high above the fireplace 
+
+https://github.com/user-attachments/assets/8abc8c57-634e-47dc-8d86-d2f11b4a4733
+
+
+- `look-up`: Marco on that sofa, seen from behind, looking up at the TV and rubbing his neck 
+
+https://github.com/user-attachments/assets/1937bc5c-e83c-4167-8190-6a5d5298f50c
+
+
 
 The whole run cost **$4.80** on kie.ai: two Avatar versions, one test clip, five A-roll lines and the B-roll. That includes a redo: the first B-roll images reused the A-roll room and had Marco facing the camera while looking up behind him, so the shots were remade with a new room and the camera placed behind him. The storyboard, Avatar spec and prompts are in [examples/creator-marco-tv-height](examples/creator-marco-tv-height). A [skincare ad storyboard](examples/ugc-ad-skincare/beats.json) is included as a second example.
 
